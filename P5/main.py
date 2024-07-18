@@ -21,8 +21,9 @@ async def root():
 async def summarize_text(request: TextRequest):
     try:
         model = genai.GenerativeModel('gemini-1.5-flash')
-        response = model.generate_content(f"Summarize the following text in less than 100 words: {request.text}").text
-        return {"summary": response}
+        response = model.generate_content(f"Summarize the following text in less than 100 words: {request.text}")
+        summary = response.text
+        return {"summary": summary}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
